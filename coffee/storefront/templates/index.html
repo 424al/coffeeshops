@@ -1,5 +1,7 @@
 {% extends "base.html" %}
+{% load crispy_forms_tags %}
 {% block content %}
+
 <nav class="navbar navbar-expand-sm bg-light">
 
   <!-- Links -->
@@ -16,6 +18,11 @@
   </ul>
 
 </nav>
+<div class="container">
+  <div class="row">
+    {% crispy form %}
+  </div>
+</div>
 <style>
       /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */

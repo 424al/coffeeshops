@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import StoreFronts
+from .models import StoreFront
 
 # Register your models here.
-admin.site.register(StoreFronts)
+admin.site.register(StoreFront)

@@ -11,7 +11,7 @@ ACTIVE =(
     )
 
 
-class StoreFronts(models.Model):
+class StoreFront(models.Model):
     name = models.CharField(max_length=250, blank=False)
     street_address = models.CharField(max_length=100, blank=True)
     additional_address_field = models.CharField(max_length=100, blank=True)
@@ -28,3 +28,8 @@ class StoreFronts(models.Model):
     # lattitude =
     # longitude =
     # uuid =
+    class Meta:
+        ordering = ["-name"]
+
+    def __str__(self):
+        return self.name

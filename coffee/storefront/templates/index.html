@@ -1,28 +1,8 @@
 {% extends "base.html" %}
-{% load crispy_forms_tags %}
 {% block content %}
 
-<nav class="navbar navbar-expand-sm bg-light">
 
-  <!-- Links -->
-  <ul class="navbar-nav">
-    <li class="nav-item">
-      <a class="nav-link" href="#">Home</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">About</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">Sign In</a>
-    </li>
-  </ul>
 
-</nav>
-<div class="container">
-  <div class="row">
-    {% crispy form %}
-  </div>
-</div>
 <style>
       /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
@@ -38,16 +18,60 @@
     </style>
   </head>
   <body>
-    <div id="map"></div>
-    <script>
-      var map;
-      function initMap() {
-        map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: -34.397, lng: 150.644},
-          zoom: 8
-        });
-      }
+    <!--The div element for the map -->
+    <div id="map">
+    <script type="text/javascript">
+      var openInfoWindow;
+      var locations = {{data|safe}};
+// This example displays a marker at the center of Australia.
+// When the user clicks the marker, an info window opens.
+
+function initMap() {
+
+  var Augies = {lat: 33.986872, lng: -117.808030};
+  var map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 10,
+    center: Augies }
+  );
+  let marker;
+  for( let i = 0; i <= locations.length; i++) {
+    marker = new google.maps.Marker({
+        position: new google.maps.LatLng(locations[i]['latitude'], locations[i]['longitude']),
+        map: map,
+        title: locations[i]['name']
+    });
+    var name = locations[i]['name']
+    var base = "http://127.0.0.1:8000/shops/"
+    var website = locations[i]['slug']
+    var bio = locations[i]['about']
+    var a = base + website
+    var b = "<a href="+a+"/><b>"+name+"</b></a>"
+    var c = "<p>"+bio+"</p>"
+
+
+    var text = b + c
+      var infowindow = new google.maps.InfoWindow()
+
+      google.maps.event.addListener(marker,'click', (function(marker,text,infowindow){
+        return function() {
+
+       if (openInfoWindow)
+         openInfoWindow.close();
+
+          infowindow.setContent(text);
+          openInfoWindow = infowindow;
+          infowindow.open(map,marker);
+
+        };
+    })(marker,text,infowindow));
+}
+}
     </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap"
+ <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAU0_1-g0ZZOOOT3YmVL-UI2RVyoLVnJHM&callback=initMap"
     async defer></script>
+
+
+
+
+
 {% endblock content %}

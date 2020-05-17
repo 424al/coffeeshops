@@ -20,11 +20,28 @@ class ShopSubmission(forms.ModelForm):
                 Column('name', css_class='form-group col-md-3 mb-3'),
                 Column('street_address', css_class='form-group col-md-3 mb-3'),
                 Column('additional_address_field', css_class='form-group col-md-3 mb-3'),
-                Submit(
-                    'submit', "Submit"
-                )
+                # Submit(
+                #     'submit', "Submit"
+                # )
+            ),
+            Row(
+                Column('city', css_class='form-group col-md-3 mb-3'),
+                Column('state', css_class='form-group col-md-3 mb-3'),
+                Column('zip_code', css_class='form-group col-md-3 mb-3'),
+            ),
+            Row(
+                Column('latitude', css_class='form-group col-md-3 mb-3'),
+                Column('longitude', css_class='form-group col-md-3 mb-3'),
+                Column('zip_code', css_class='form-group col-md-3 mb-3'),
+            ),
+            Row(
+                Column('phone', css_class='form-group col-md-3 mb-3'),
+                Column('instagram_username', css_class='form-group col-md-3 mb-3'),
+            ),
+            Submit(
+                'submit', "Submit"
+            )
 
-        ),
 
         )
 
@@ -39,13 +56,27 @@ class ShopSubmission(forms.ModelForm):
         fields = {
             'name',
             'street_address',
-            'additional_address_field'
+            'additional_address_field',
+            'city',
+            'state',
+            'zip_code',
+            'latitude',
+            'longitude',
+            'phone',
+            'instagram_username'
         }
 
         labels = {
             'name':_("Store Name"),
             'street_address':_("Address"),
-            'additional_address_field':_("Address 2")
+            'additional_address_field':_("Address 2"),
+            'city':_("City"),
+             'state':_("State"),
+             'zip_code':_("Zip Code"),
+             'latitude':_("latitude"),
+            'longitude':_("longitude"),
+             'phone':_("Phone Number"),
+             'instagram_username':_("Instagram Username")
         }
 
         widgets = {
@@ -58,6 +89,34 @@ class ShopSubmission(forms.ModelForm):
 
             ),
             'additional_address_field': forms.TextInput(
+                attrs={"class": "form-control", "cols": 80, "rows": 1}
+
+            ),
+            'city': forms.TextInput(
+                attrs={"class": "form-control", "cols": 80, "rows": 1}
+
+            ),
+            'state': forms.TextInput(
+                attrs={"class": "form-control", "cols": 80, "rows": 1}
+
+            ),
+            'zip_code': forms.TextInput(
+                attrs={"class": "form-control", "cols": 80, "rows": 1}
+
+            ),
+            'latitude': forms.TextInput(
+                attrs={"class": "form-control", "cols": 80, "rows": 1}
+
+            ),
+            'longitude': forms.TextInput(
+                attrs={"class": "form-control", "cols": 80, "rows": 1}
+
+            ),
+            'phone': forms.TextInput(
+                attrs={"class": "form-control", "cols": 80, "rows": 1}
+
+            ),
+            'instagram_username': forms.TextInput(
                 attrs={"class": "form-control", "cols": 80, "rows": 1}
 
             ),

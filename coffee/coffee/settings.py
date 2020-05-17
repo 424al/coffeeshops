@@ -25,13 +25,21 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+AUTH_USER_MODEL = 'storefront.User'
 # Application definition
 
 
 INSTALLED_APPS = [
-    'parsley',
+
     'storefront',
+
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
     'crispy_forms',
+    'parsley',
+
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -40,9 +48,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
 
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
+
 
 ]
 SITE_ID = 1
@@ -57,6 +63,10 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend', # existing backend
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
 ROOT_URLCONF = 'coffee.urls'
 
 TEMPLATES = [
@@ -74,16 +84,9 @@ TEMPLATES = [
         },
     },
 ]
-AUTHENTICATION_BACKENDS = (
 
-    'django.contrib.auth.backends.ModelBackend',
-
-    'allauth.account.auth_backends.AuthenticationBackend',
-
-)
 
 WSGI_APPLICATION = 'coffee.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
@@ -134,15 +137,21 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'storefront/static/')
+]
 
 """
 all auth functions
 """
-ACCOUNT_AUTHENTICATED_LOGIN_REDIRECTS = True
+ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
-ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+
+ACCOUNT_AUTHENTICATED_LOGIN_REDIRECTS = True
+
+
 ACCOUNT_EMAIL_SUBJECT_PREFIX = '[Coffee Cups]'
 ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = True
 ACCOUNT_UNIQUE_EMAIL = True

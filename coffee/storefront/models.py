@@ -70,7 +70,7 @@ class StoreFront(models.Model):
     additional_address_field = models.CharField(max_length=100, blank=True)
     city = models.CharField(max_length=100, blank=True)
     state = models.CharField(max_length=100, blank=True)
-    zip_code = models.CharField(max_length=100, blank=True)
+    zip_code = models.CharField(max_length=100, blank=False)
     latitude = models.FloatField(blank=False,default=0.0)
     longitude = models.FloatField(blank=False,default=0.0)
     phone = models.CharField(max_length=100, blank=True)

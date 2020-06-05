@@ -156,3 +156,4 @@ ACCOUNT_EMAIL_SUBJECT_PREFIX = '[Coffee Cups]'
 ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = True
 ACCOUNT_UNIQUE_EMAIL = True
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+LOGIN_REDIRECT_URL = '/'  # Or whatever you want to redirect to after email verification

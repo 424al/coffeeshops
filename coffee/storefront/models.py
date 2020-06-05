@@ -76,6 +76,12 @@ class StoreFront(models.Model):
     phone = models.CharField(max_length=100, blank=True)
     instagram_username =models.CharField(max_length=100, blank=True)
     status = models.IntegerField(choices=ACTIVE, default=0)
+    created_by = models.ForeignKey(
+        User,
+        related_name="location_made_by",
+        on_delete=models.SET_NULL,
+        null=True,
+    )
 
 
     """

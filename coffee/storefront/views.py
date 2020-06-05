@@ -1,20 +1,30 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
-from .models import StoreFront
-
 from django.views.generic import CreateView
-from .new_shop_form import ShopSubmission
 from django.urls import reverse_lazy
+from .models import StoreFront
+from .new_shop_form import ShopSubmission
 import json
 
 # Create your views here.
 
 
+class Test(LoginRequiredMixin,CreateView):
+    login_url = reverse_lazy("login")
+    redirect_field_name = None
 
-class Test(CreateView):
     form_class = ShopSubmission
     model = StoreFront
     template_name = 'shop_registration.html'
     success_url = reverse_lazy('mysite')
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.created_by = self.request.user
+        self.object.save()
+        return super().form_valid(form)
+
+
 
     def get_form(self, form_class=None):
         form = super(Test,self).get_form(form_class)

@@ -181,6 +181,7 @@ class DatatablesServerSideView(View):
 
 
 # Create your views here.
+#HOME PAGE
 def homepage(request):
     # locations = StoreFront.objects.all()
     # json = json.dumps(list(locations))
@@ -195,13 +196,15 @@ def homepage(request):
 
     return render(request,'index.html',args)
 
-class Test(LoginRequiredMixin,CreateView):
+
+#CREATE VIEW TO HANDLE NEW LOCATIONS
+class AddLocation(CreateView):
     login_url = reverse_lazy("login")
 
     form_class = ShopSubmission
     model = StoreFront
     template_name = 'shop_registration.html'
-    success_url = reverse_lazy('mysite')
+    success_url = reverse_lazy('homepage')
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
@@ -212,10 +215,31 @@ class Test(LoginRequiredMixin,CreateView):
 
 
     def get_form(self, form_class=None):
-        form = super(Test,self).get_form(form_class)
+        form = super(AddLocation,self).get_form(form_class)
 
         return form
 
+#DETAIL VIEW OF LOCATION
+class LocationDetailView(DetailView):
+    login_url = reverse_lazy("login")
+
+    form_class = ShopSubmission
+    model = StoreFront
+    template_name = 'shop_registration.html'
+    success_url = reverse_lazy('homepage')
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.created_by = self.request.user
+        self.object.save()
+        return super().form_valid(form)
+
+
+
+    def get_form(self, form_class=None):
+        form = super(AddLocation,self).get_form(form_class)
+
+        return form
 
 class LocationsDirectory(DatatablesServerSideView):
     model = StoreFront

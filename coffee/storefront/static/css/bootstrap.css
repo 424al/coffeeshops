@@ -3,7 +3,10 @@
  * Copyright 2011-2019 The Bootstrap Authors
  * Copyright 2011-2019 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ * My custom css starts below root
  */
+
+
 :root {
   --blue: #007bff;
   --indigo: #6610f2;
@@ -33,6 +36,224 @@
   --breakpoint-xl: 1200px;
   --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+.NavContainer{
+    width:80%;
+    margin: 0 auto;
+}
+header{
+    background: #FF5733;
+    font-family: 'Staatliches', cursive;
+    font-weight: 300;
+}
+header::after{
+content: '';
+display: table;
+clear: both;
+
+}
+.logo{
+    float:left;
+    bottom: 30px;
+    margin:0;
+
+    color:#F4F6F7;
+
+
+
+}
+.logotext{
+color:#F4F6F7;
+text-decoration:none;
+text-transform: uppercase;
+
+}
+.NavContainer a:hover{
+
+color:#F4F6F7;
+text-decoration:none;
+}
+nav{
+float:right;
+}
+
+nav ul{
+margin:0;
+padding:0;
+list-style:none;
+
+}
+
+nav li{
+display: inline-block;
+font-family: 'Nunito', sans-serif;
+margin-left: 20px;
+padding-top: 5px;
+position: relative;
+
+}
+
+nav a{
+color:#F4F6F7;
+text-decoration:none;
+font-size: 18px;
+
+}
+
+nav a:hover{
+color:#F4F6F7;
+}
+
+nav a::before{
+content: '';
+display: block;
+height:5px;
+background-color:#F4F6F7;
+
+position:absolute;
+top:0;
+width: 0%;
+transition: all ease-in-out 250ms;
+
+
+}
+nav a:hover::before{
+width:100%;
+}
+.burger{
+display:none;
+}
+
+@media screen and (max-width:768px){
+body{
+overflow-x:hidden;
+}
+.logo{
+    text-align:center;
+    bottom: 30px;
+
+    color:#F4F6F7;}
+.nav-items{
+position:absolute;
+right:0px;
+height:100vh;
+top: 5vh;
+text-decoration:none;
+z-index:10;
+background-color:#FF5733;
+display: flex;
+flex-direction:column ;
+align-items:center;
+width:50%;
+transform:translateX(100%);
+transition: transform 0.5s ease-in;
+
+}
+
+.nav-items li{
+padding-top:50px;
+
+}
+.burger{
+display:block;
+padding-top:3px;
+cursor:pointer;
+}
+
+nav a{
+color:#F4F6F7;
+text-decoration:none;
+font-size: 25px;
+
+}
+
+nav a:hover{
+color:#F4F6F7;
+}
+
+nav a::before{
+content: '';
+display: block;
+height:5px;
+background-color:#F4F6F7;
+
+position:absolute;
+top:0;
+width: 0%;
+transition: all ease-in-out 250ms;
+
+
+}
+nav a:hover::before{
+width:0%;
+}
+}
+.nav-active{
+transform:translateX(0%);
+z-index:10;
+
+
+}
+
+
+@media screen and (max-width:1024px){
+nav li{
+display: inline-block;
+font-family: 'Nunito', sans-serif;
+margin-left: 20px;
+padding-top: 5px;
+position: relative;
+
+}
+@keyframes navLinkFade{
+  from{
+    opacity: 0;
+    transform: translateX(50px);
+
+  }
+  to{
+    opacity: 1;
+    transform: translateX(0px) 2s;
+  }
+}
+
+.toggle .line1{
+  transform: rotate(-47deg) translate(-5px,6px);
+}
+.toggle .burger .line2{
+  opacity: 0;
+}
+.toggle .line3{
+  transform: rotate(45deg) translate(-3px,-6px);
+}
+}
+.burger div{
+    width:25px;
+    height: 3px;
+    margin: 5px;
+    background-color: #F4F6F7;
+}
+@keyframes navLinkFade{
+  from{
+    opacity: 0;
+    transform: translateX(50px);
+
+  }
+  to{
+    opacity: 1;
+    transform: translateX(0px) 2s;
+  }
+}
+
+.toggle .line1{
+  transform: rotate(-47deg) translate(-5px,6px);
+}
+.toggle .burger .line2{
+  opacity: 0;
+}
+.toggle .line3{
+  transform: rotate(45deg) translate(-3px,-6px);
 }
 
 *,

@@ -39,8 +39,11 @@
 }
 
 .NavContainer{
-    width:80%;
+
+    width:100%;
     margin: 0 auto;
+    overflow-x:hidden;
+
 }
 header{
     background: #FF5733;
@@ -126,8 +129,9 @@ display:none;
 }
 
 @media screen and (max-width:768px){
-body{
+html body{
 overflow-x:hidden;
+max-width: 100%
 }
 .logo{
     text-align:center;
@@ -138,7 +142,7 @@ overflow-x:hidden;
 position:absolute;
 right:0px;
 height:100vh;
-top: 5vh;
+top: 4vh;
 text-decoration:none;
 z-index:10;
 background-color:#FF5733;
@@ -206,17 +210,7 @@ padding-top: 5px;
 position: relative;
 
 }
-@keyframes navLinkFade{
-  from{
-    opacity: 0;
-    transform: translateX(50px);
 
-  }
-  to{
-    opacity: 1;
-    transform: translateX(0px) 2s;
-  }
-}
 
 .toggle .line1{
   transform: rotate(-47deg) translate(-5px,6px);
@@ -234,27 +228,7 @@ position: relative;
     margin: 5px;
     background-color: #F4F6F7;
 }
-@keyframes navLinkFade{
-  from{
-    opacity: 0;
-    transform: translateX(50px);
 
-  }
-  to{
-    opacity: 1;
-    transform: translateX(0px) 2s;
-  }
-}
-
-.toggle .line1{
-  transform: rotate(-47deg) translate(-5px,6px);
-}
-.toggle .burger .line2{
-  opacity: 0;
-}
-.toggle .line3{
-  transform: rotate(45deg) translate(-3px,-6px);
-}
 
 *,
 *::before,

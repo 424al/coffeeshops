@@ -17,26 +17,26 @@ class ShopSubmission(forms.ModelForm):
         self.helper.attrs = {"data-parsley-validate": ""}
         self.helper.layout = Layout(
             Row(
-                Column('name', css_class='form-group col-md-3 mb-3'),
-                Column('street_address', css_class='form-group col-md-3 mb-3'),
-                Column('additional_address_field', css_class='form-group col-md-3 mb-3'),
+                Column('name', css_class='form-group col-md-6 mb-3'),
+                Column('instagram_username', css_class='form-group col-md-3 mb-3'),
+
                 # Submit(
                 #     'submit', "Submit"
                 # )
             ),
             Row(
-                Column('city', css_class='form-group col-md-3 mb-3'),
-                Column('state', css_class='form-group col-md-3 mb-3'),
-                Column('zip_code', css_class='form-group col-md-3 mb-3'),
+                Column('street_address', css_class='form-group col-md-6 mb-3'),
+                Column('latitude', css_class='form-group col-md-2 mb-3'),
+                Column('longitude', css_class='form-group col-md-2 mb-3'),
+
             ),
             Row(
-                Column('latitude', css_class='form-group col-md-3 mb-3'),
-                Column('longitude', css_class='form-group col-md-3 mb-3'),
-                Column('zip_code', css_class='form-group col-md-3 mb-3'),
+                Column('zip_code', css_class='form-group col-md-2 mb-3'),
+
             ),
+
             Row(
                 Column('phone', css_class='form-group col-md-3 mb-3'),
-                Column('instagram_username', css_class='form-group col-md-3 mb-3'),
             ),
             Submit(
                 'submit', "Submit"
@@ -120,4 +120,12 @@ class ShopSubmission(forms.ModelForm):
                 attrs={"class": "form-control", "cols": 80, "rows": 1}
 
             ),
+
+        }
+        help_texts = {
+            'street_address': 'Please try to use an address from the dropdown menu that appears as you type.',
+            'latitude': 'We handle this :)',
+            'longitude': 'We handle this :)',
+            'zip_code': "Sadly we don't handle this:("
+
         }

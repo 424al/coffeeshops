@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+		<h1>List of Locations ( {{ locations }} )</h1>
+		<hr>
+		<table id="locationtable">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Street Address</th>
+					<th>Status</th>
+				</tr>
+			</thead>
+			<tbody></tbody>
+		</table>
+
+<!--		<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>-->
+<!--		<script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>-->
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js" ></script>
+<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+		<script language="javascript">
+			$(document).ready(function () {
+				/* Here begins the DataTable configuration. */
+				$('#locationtable').DataTable({
+					/* Tell the DataTable that we need server-side processing. */
+					serverSide: true,
+					/* Set up the data source */
+					ajax: {
+						url: "{% url "location_table" %}"
+					},
+					/* And set up the columns. Note that they must be identified by a "name" attribute,
+					   with the value matching the columns in your Django view. The "data" attribute selects which record value will be used,
+					   and should be the same value than for the "name" attribute. */
+					columns: [
+						{name: "name", data: "name"},
+						{name: "street_address", data: "street_address"},
+						{name: "status", data: "status"},
+
+					]
+				});
+			});
+		</script>
+{% endblock content %}

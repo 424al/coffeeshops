@@ -3,6 +3,8 @@ from django.db import models
 from django.utils import timezone
 from uuid import uuid4
 
+from .components.slug import unique_slugify
+
 # List that determines whether or not shop get's approved to be displayed
 
 ACTIVE =(
@@ -75,13 +77,9 @@ class StoreFront(models.Model):
     longitude = models.FloatField(blank=False,default=0.0)
     phone = models.CharField(max_length=100, blank=True)
     instagram_username =models.CharField(max_length=100, blank=True)
+    slug = models.SlugField(blank=False)
     status = models.IntegerField(choices=ACTIVE, default=0)
-    created_by = models.ForeignKey(
-        User,
-        related_name="location_made_by",
-        on_delete=models.SET_NULL,
-        null=True,
-    )
+    created_by_email = models.EmailField(blank=False,max_length=50)
 
 
     """
@@ -95,5 +93,11 @@ class StoreFront(models.Model):
 
     def __str__(self):
         return self.name
+
+
+    def save(self, **kwargs):
+        slug = '%s' % (self.name)
+        unique_slugify(self, slug)
+        super(StoreFront, self).save()
 
 

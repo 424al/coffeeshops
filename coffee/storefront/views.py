@@ -188,7 +188,7 @@ def homepage(request):
     # args = {
     #     'locations':json,
     # }
-    data = StoreFront.objects.values('name','latitude','longitude')
+    data = StoreFront.objects.values('name','latitude','longitude','street_address','slug')
     json_data = json.dumps(list(data))
     args = {
             'data': json_data,
@@ -207,9 +207,15 @@ class AddLocation(CreateView):
     success_url = reverse_lazy('homepage')
 
     def form_valid(self, form):
-        self.object = form.save(commit=False)
-        self.object.created_by = self.request.user
-        self.object.save()
+        """
+        ONLY USE FUNCTION BELOW WHEN TRYING TO
+        USE 'created_by' FUNCTIONS OR SIMILAR
+        """
+        # self.object = form.save(commit=False)
+        # self.object.created_by = self.request.user
+        # self.object.save()
+
+
         return super().form_valid(form)
 
 
@@ -221,25 +227,21 @@ class AddLocation(CreateView):
 
 #DETAIL VIEW OF LOCATION
 class LocationDetailView(DetailView):
-    login_url = reverse_lazy("login")
-
-    form_class = ShopSubmission
+    """
+    Class used to view the profile
+    of a specific location
+    """
     model = StoreFront
-    template_name = 'shop_registration.html'
-    success_url = reverse_lazy('homepage')
-
-    def form_valid(self, form):
-        self.object = form.save(commit=False)
-        self.object.created_by = self.request.user
-        self.object.save()
-        return super().form_valid(form)
+    slug_field = "slug"
+    slug_url_kwarg = "slug"
+    template_name = 'profile/location_profile.html'
 
 
 
-    def get_form(self, form_class=None):
-        form = super(AddLocation,self).get_form(form_class)
-
-        return form
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['location'] = StoreFront.objects.all()
+        return context
 
 class LocationsDirectory(DatatablesServerSideView):
     model = StoreFront

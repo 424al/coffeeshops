@@ -13,7 +13,7 @@
       }
       /* Optional: Makes the sample page fill the window. */
       html, body {
-        height: 100%;
+        height: 80%;
         margin: 0;
         padding: 0;
       }
@@ -21,7 +21,7 @@
   </head>
   <body>
     <!--The div element for the map -->
-    <div id="map">
+    <div id="map"></div>
     <script type="text/javascript">
       var openInfoWindow;
       var locations = {{data|safe}};
@@ -43,9 +43,9 @@ function initMap() {
         title: locations[i]['name']
     });
     var name = locations[i]['name']
-    var base = "http://127.0.0.1:8000/shops/"
+    var base = "http://127.0.0.1:8000/"
     var website = locations[i]['slug']
-    var bio = locations[i]['about']
+    var bio = locations[i]['street_address']
     var a = base + website
     var b = "<a href="+a+"/><b>"+name+"</b></a>"
     var c = "<p>"+bio+"</p>"

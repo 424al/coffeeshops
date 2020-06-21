@@ -26,18 +26,19 @@ class ShopSubmission(forms.ModelForm):
             ),
             Row(
                 Column('street_address', css_class='form-group col-md-6 mb-3'),
-                Column('latitude', css_class='form-group col-md-2 mb-3'),
-                Column('longitude', css_class='form-group col-md-2 mb-3'),
-
+                Column('latitude', css_class='form-group col-md-1 mb-3'),
+                Column('longitude', css_class='form-group col-md-1 mb-3'),
+                Column('zip_code', css_class='form-group col-md-1 mb-3'),
             ),
-            Row(
-                Column('zip_code', css_class='form-group col-md-2 mb-3'),
 
-            ),
+
 
             Row(
-                Column('phone', css_class='form-group col-md-3 mb-3'),
+                # Column('phone', css_class='form-group col-md-3 mb-3'),
+                Column('created_by_email', css_class='form-group col-md-3 mb-3'),
+
             ),
+
             Submit(
                 'submit', "Submit"
             )
@@ -63,7 +64,8 @@ class ShopSubmission(forms.ModelForm):
             'latitude',
             'longitude',
             'phone',
-            'instagram_username'
+            'instagram_username',
+            'created_by_email'
         }
 
         labels = {
@@ -76,7 +78,8 @@ class ShopSubmission(forms.ModelForm):
              'latitude':_("latitude"),
             'longitude':_("longitude"),
              'phone':_("Phone Number"),
-             'instagram_username':_("Instagram Username")
+             'instagram_username':_("Instagram Username"),
+            'created_by_email':_("Your Email")
         }
 
         widgets = {

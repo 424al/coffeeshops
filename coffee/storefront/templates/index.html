@@ -43,7 +43,8 @@ function initMap() {
         title: locations[i]['name']
     });
     var name = locations[i]['name']
-    var base = "http://127.0.0.1:8000/"
+    var base = window.location;
+
     var website = locations[i]['slug']
     var bio = locations[i]['street_address']
     var a = base + website

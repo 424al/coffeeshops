@@ -32,14 +32,15 @@ AUTH_USER_MODEL = 'storefront.User'
 INSTALLED_APPS = [
 
     'storefront',
+    'frontend',
 
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'crispy_forms',
     'parsley',
-
-
+    'corsheaders',
+    'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -52,8 +53,13 @@ INSTALLED_APPS = [
 
 ]
 SITE_ID = 1
+CORS_ORIGIN_ALLOW_ALL = True
 
 MIDDLEWARE = [
+    # Allows RESTFUL API
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
+
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -158,3 +164,17 @@ ACCOUNT_UNIQUE_EMAIL = True
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 LOGIN_REDIRECT_URL = '/'  # Or whatever you want to redirect to after email verification
 LOGIN_URL = 'account/login/'
+
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
+}
+# Use For Production So that API isn't viewable
+# REST_FRAMEWORK = {
+#     'DEFAULT_RENDERER_CLASSES': (
+#         'rest_framework.renderers.JSONRenderer',
+#     )
+# }

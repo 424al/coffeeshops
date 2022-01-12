@@ -39,7 +39,7 @@ oauthlib==3.1.0
 Pillow==7.1.2
 pinax-invitations==6.1.2
 pinax-teams==1.0.6
-pipenv==2018.11.26
+pipenv==2022.1.8
 PyAutoGUI==0.9.50
 PyGetWindow==0.0.8
 pygubu==0.9.8.6
